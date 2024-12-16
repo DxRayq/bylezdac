@@ -1,0 +1,9 @@
+let username = prompt("Podaj nazwę użytkownika:", "Twoja nazwa użytkownika");
+!username ? (alert("Anulowano logowanie."), window.close()) : null;
+
+let password = username ? prompt("Podaj hasło:", "Twoje hasło") : null;
+!password ? (alert("Anulowano logowanie."), window.close()) : null;
+
+(username === "admin" && password === "12345") 
+    ? alert("Zalogowano pomyślnie!") 
+    : (alert("Nieprawidłowa nazwa użytkownika lub hasło. Zamykam stronę."), window.close());
