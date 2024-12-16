@@ -1,9 +1,24 @@
-let username = prompt("Podaj nazwę użytkownika:", "Twoja nazwa użytkownika");
-!username ? (alert("Anulowano logowanie."), window.close()) : null;
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie</title>
+</head>
+<body>
+    <script>
+        alert('Witamy w systemie logowania!');
 
-let password = username ? prompt("Podaj hasło:", "Twoje hasło") : null;
-!password ? (alert("Anulowano logowanie."), window.close()) : null;
+        let username = prompt("Podaj nazwę użytkownika:", "Twoja nazwa użytkownika");
+        !username ? (alert("Anulowano logowanie."), window.close()) : null;
 
-(username === "admin" && password === "12345") 
-    ? alert("Zalogowano pomyślnie!") 
-    : (alert("Nieprawidłowa nazwa użytkownika lub hasło. Zamykam stronę."), window.close());
+        let password = username ? prompt("Podaj hasło:", "Twoje hasło") : null;
+        !password ? (alert("Anulowano logowanie."), window.close()) : null;
+
+        (username === "admin" && password === "12345") 
+            ? alert("Zalogowano pomyślnie!") 
+            : (alert("Nieprawidłowa nazwa użytkownika lub hasło. Zamykam stronę."), window.close());
+    </script>
+<h1>Test</h1>
+</body>
+</html>
