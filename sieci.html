@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edytowalna Strona</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #editable {
+            border: 1px solid #ccc;
+            padding: 10px;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Edytowalna Strona</h1>
+<div id="editable" contenteditable="true">
+    Możesz pisać tutaj...
+</div>
+
+<script>
+    const editableDiv = document.getElementById('editable');
+    editableDiv.addEventListener('input', function() {
+        localStorage.setItem('content', editableDiv.innerHTML);
+    });
+
+    window.addEventListener('load', function() {
+        const savedContent = localStorage.getItem('content');
+        if (savedContent) {
+            editableDiv.innerHTML = savedContent;
+        }
+    });
+</script>
+
+</body>
+</html>
