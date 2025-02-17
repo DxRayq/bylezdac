@@ -3,39 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edytowalna Strona</title>
+    <title>Wspólne Notatki</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
         }
-        #editable {
-            border: 1px solid #ccc;
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin: 10px 0;
             padding: 10px;
-            min-height: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .note-display {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            padding: 15px;
+            background-color: #fff9c4;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Wspólne Notatki</h1>
+        
+        <textarea id="noteInput" placeholder="Wpisz swoją notatkę..."></textarea>
+        
+        <div>
+            <button onclick="saveNote()">Zapisz notatkę</button>
+            <button onclick="loadNote()">Odśwież notatkę</button>
+        </div>
 
-<h1>Edytowalna Strona</h1>
-<div id="editable" contenteditable="true">
-    Możesz pisać tutaj...
-</div>
+        <div class="note-display" id="noteDisplay">
+            Ładowanie notatki...
+        </div>
+    </div>
 
-<script>
-    const editableDiv = document.getElementById('editable');
-    editableDiv.addEventListener('input', function() {
-        localStorage.setItem('content', editableDiv.innerHTML);
-    });
-
-    window.addEventListener('load', function() {
-        const savedContent = localStorage.getItem('content');
-        if (savedContent) {
-            editableDiv.innerHTML = savedContent;
+    <script>
+        // Konfiguracja JSONBin.io
+        const API_KEY = '$2a$10$tt4uTmxEfXN5ImvCFVtH6uPIYN9.sVXV2O.sWlyqNIngDChZ8fM8.'; // Zastąp swoim API Key
+        const BIN_ID = '67b336fcad19ca34f80719d5'; // Zastąp ID swojego bina
+        
+        async function saveNote() {
+            const note = document.getElementById('noteInput').value;
+            
+            try {
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': API_KEY
+                    },
+                    body: JSON.stringify({ note })
+                });
+                
+                if (response.ok) {
+                    alert('Notatka zapisana!');
+                    loadNote();
+                } else {
+                    alert('Błąd podczas zapisywania');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Wystąpił błąd');
+            }
         }
-    });
-</script>
 
+        async function loadNote() {
+            try {
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`);
+                const data = await response.json();
+                document.getElementById('noteDisplay').textContent = data.record.note;
+                document.getElementById('noteInput').value = data.record.note;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('noteDisplay').textContent = 'Błąd podczas ładowania notatki';
+            }
+        }
+
+        // Automatyczne ładowanie notatki przy starcie
+        loadNote();
+    </script>
 </body>
 </html>
