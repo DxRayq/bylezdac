@@ -1,27 +1,54 @@
-// Tablica z polskimi nazwami miesięcy
-const polishMonths = [
-    'stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca',
-    'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'
-];
+<!DOCTYPE html>
 
-// Funkcja do konwersji daty
-function convertToPolishDate(dateString) {
-    // Tworzenie obiektu Date z podanego stringu
-    const date = new Date(dateString);
-    
-    // Pobieranie komponentów daty
-    const day = date.getDate();         // Dzień
-    const monthIndex = date.getMonth(); // Indeks miesiąca (0-11)
-    const year = date.getFullYear();    // Rok
-    
-    // Pobieranie polskiej nazwy miesiąca z tablicy
-    const polishMonth = polishMonths[monthIndex];
-    
-    // Tworzenie stringu w polskim formacie
-    return `${day} ${polishMonth} ${year}`;
-}
+<html lang="pl">
 
-// Przykład użycia
-const englishDate = "January 1, 2023";
-const polishDate = convertToPolishDate(englishDate);
-console.log(polishDate); // Wynik: "1 stycznia 2023"
+<head>
+	<meta charset="utf-8">
+
+	<title>JavaScript. </title>
+	
+	<link rel="stylesheet" href="">
+	
+	<script>
+		
+	</script>
+</head>
+
+<body>
+	
+	<h1>Skrypt logowania, sprawdzający, czy hasło jest numerem (typ liczbowy). Nie można wykonać innej czynności - tylko wpisanie hasła z danymi typu <i>liczbowego</i></h1>
+	
+	<script>
+		for(;;)
+		{
+			let liczba = Number(prompt("Podaj dowolną liczbę",""));
+			
+			if(!isNaN(liczba))
+			break;
+		}
+		
+		document.write("Ala ma kota" + "<br>");
+	</script>
+	
+	<script>
+		document.write("<br><br>");
+		document.write("--------");
+		document.write("<br><br>");
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</body>
+
+</html>
